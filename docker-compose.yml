@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: hanthana_db
+    environment:
+      POSTGRES_DB: hanthana
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - "7504:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./DB:/docker-entrypoint-initdb.d
+
+  redis:
+    image: redis:7-alpine
+    container_name: hanthana_redis
+    ports:
+      - "7505:6379"
+
+  php:
+    image: php:8.3-cli-alpine
+    container_name: hanthana_backend
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "7506:8080"
+    command: ["php", "-S", "0.0.0.0:8080"]
+
+volumes:
+  postgres_data:

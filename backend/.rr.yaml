@@ -1,0 +1,32 @@
+version: '3'
+
+server:
+  command: "php worker.php"
+  relay: "pipes"
+
+http:
+  address: "0.0.0.0:8080"
+  
+  pool:
+    num_workers: 2
+    max_jobs: 100
+    allocate_timeout: 60s
+    destroy_timeout: 60s
+    supervisor:
+      max_worker_memory: 100
+
+logs:
+  level: debug
+  mode: development
+  encoding: console
+  output: stdout
+
+reload:
+  enabled: true
+  interval: 1s
+  patterns: [ ".php" ]
+  services:
+    http:
+      recursive: true
+      ignore: [ "vendor" ]
+      patterns: [ ".php" ]

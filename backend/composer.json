@@ -1,0 +1,36 @@
+{
+    "name": "hanthana/platform",
+    "type": "project",
+    "description": "Hanthana University Academic Collaboration Platform",
+    "keywords": ["php", "roadrunner", "postgresql", "redis", "academic"],
+    "require": {
+        "php": "^8.3",
+        "spiral/roadrunner-worker": "^2.13",
+        "spiral/roadrunner-http": "^2.6",
+        "nyholm/psr7": "^1.8",
+        "ext-pdo": "*",
+        "ext-pdo_pgsql": "*",
+        "ext-redis": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "echo 'Dependencies autoloaded successfully'"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "spiral/composer-publish-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
